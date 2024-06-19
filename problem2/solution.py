@@ -1,18 +1,21 @@
 class Solution:
     def jump(self, nums: list[int]) -> int:
-        jumps = 0
-        goal_index = len(nums) - 1
-        while len(nums) != 1:
-            for i in range(len(nums)):
-                if i + nums[i] >= goal_index:
-                    jumps += 1
-                    if i == 0:
-                        return jumps
+        jump_count = 0
+        goalIndex = len(nums) - 1
+        while goalIndex != 0:
+            for i, num in enumerate(nums):
+                if (i + num >= goalIndex):
+                    jump_count += 1
+                    goalIndex = i
                     break
-            goal_index = i
-        return 0
+        return jump_count
 
+
+
+def main():
+    solution = Solution()
+    jump_count = solution.jump([2,3,1,1,4])
+    print("jumps: ",jump_count)
 
 if __name__ == "__main__":
-    sol = Solution()
-    print(sol.jump([0]))
+    main()

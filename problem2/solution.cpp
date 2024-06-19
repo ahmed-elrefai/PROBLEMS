@@ -1,38 +1,32 @@
 #include <iostream>
 #include <vector>
-using namespace std;
 
+using namespace std;
 
 class Solution {
 public:
     int jump(vector<int>& nums) {
-        int jumps = 0;
         int goalIndex = nums.size() - 1;
+        int jumpsCount = 0;
         while (goalIndex != 0){
-            int i = 0;
-            for (i = 0; i < nums.size(); i++){
-                int reach = i + nums[i];
-                if (reach >= goalIndex){
-                    jumps++;
+            for (int i = 0; i < nums.size(); i++){
+                if (i+nums[i] >= goalIndex){
+                    jumpsCount++;
+                    goalIndex = i;
                     break;
                 }
-
             }
-            if (i == 0){
-                return jumps;
-            }
-            goalIndex = i;
         }
-        return 0;
+
+        return jumpsCount;
+
     }
 };
 
 int main(){
-    int jumps;
-    vector<int> nums = {0};
-    Solution sol = Solution();
-    jumps = sol.jump(nums);
-    cout <<    "jumps: " << jumps;
-
+    Solution solution;
+    vector<int> nums = {2,3,1,1,4};
+    int jumps = solution.jump(nums);
+    cout << "jumps: " << jumps;
     return 0;
 }
